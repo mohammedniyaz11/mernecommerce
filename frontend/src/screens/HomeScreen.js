@@ -5,6 +5,9 @@ import logger from 'use-reducer-logger';
 import axios from 'axios' 
 import { Col,Row } from 'react-bootstrap';
 import Product from '../componenets/Product';
+import { Helmet } from 'react-helmet-async';
+import Loading from '../componenets/Loading';
+import MessageBox from '../componenets/MessageBox';
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -48,13 +51,18 @@ function HomeScreen() {
 
   
   return (
+    
      
-    <div><h1>Featured Products</h1>
+    <div>
+      <Helmet>
+        <title>amazona</title>
+      </Helmet>
+      <h1>Featured Products</h1>
     <div className="products">
     {
-      loading ?( <div>Loading</div>
+      loading ?( <Loading></Loading>
       ):
-      error?(<div>{error}</div>):(
+      error?(<MessageBox varient="danger">{error}</MessageBox>):(
         
      <Row>
      {products.map(product=>(

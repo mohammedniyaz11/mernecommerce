@@ -39,3 +39,6 @@ flex: 1;
   padding: 1rem;
 }
 
+.img-large{
+  max-width: 100%;
+}
