@@ -106,7 +106,7 @@ function CartScreen() {
                 </ListGroup.Item>
               </ListGroup>
               <ListGroup.Item>
-                <Button type='button'  onClick={checkoutHandler}variant='primary' disabled={cartItems.length===0}>
+                <Button type='button'  onClick={checkoutHandler} variant='primary' disabled={cartItems.length===0}>
                   Proceed to checkout
                 </Button>
               </ListGroup.Item>
