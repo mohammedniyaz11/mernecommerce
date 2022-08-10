@@ -11,6 +11,7 @@ import { useContext } from 'react';
 import { Store } from './Store';
 import CartScreen from './screens/CartScreen';
 import SigninScreen from './screens/SigninScreen';
+import ShippingScreen from './screens/ShippingScreen';
 
 function App() {
   // const{state}=useContext(Store);
@@ -20,6 +21,7 @@ function App() {
   const signoutHandler = () => {
     ctxDispatch({ type: 'USER_SIGNOUT' });
     localStorage.removeItem('userInfo');
+    localStorage.removeItem('shippingAddress');
   };
   return (
     <BrowserRouter>
@@ -84,6 +86,7 @@ function App() {
          <Route path='/' element={<HomeScreen/>}/>
          <Route path='/cart' element={<CartScreen/>}/>
          <Route path='/signin' element={<SigninScreen/>}/>
+         <Route path='/shipping' element={<ShippingScreen/>}/>
         </Routes>
         </Container>
         
