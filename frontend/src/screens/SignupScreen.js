@@ -8,7 +8,7 @@ import {toast} from 'react-toastify'
 import { getError } from '../utils'
 
 
-function SigninScreen() {
+function SignupScreen() {
     const navigate=useNavigate()
     const [validated, setValidated] = useState(false);
     
@@ -28,15 +28,24 @@ function SigninScreen() {
 
 
     const[email,setEmail]=useState('');
+    const[name,setName]=useState('');
     const[password,setPassword]=useState('');
+    const[confirmPassword,setConfirmPassword]=useState('')
+    
+ 
     const{state,dispatch:ctxDispatch}=useContext(Store)
     const{userInfo}=state;
    
 
       const submitHandler=async(e)=>{
           e.preventDefault();
+          if(password !== confirmPassword){
+            toast.error('password doesnot match');
+            return;
+          }
           try{
-              const{data}=await Axios.post('/api/users/signin',{
+              const{data}=await Axios.post('/api/users/signup',{
+                  name,
                   email,
                   password,
               });
@@ -61,27 +70,48 @@ function SigninScreen() {
       <div>
           <Container className='small-container'>
               <Helmet>
-                  <title>Sighn in</title>
+                  <title>Sighn up</title>
               </Helmet>
-              <h1 className='my-3'>Sign In</h1>
+
+              <h1 className='my-3'>Sign up</h1>
+
               <Form  noValidate validated={validated} onClick={handleSubmit}  onSubmit={submitHandler} >
+              <Form.Group className='mb-3' controlId='email'>
+                      <Form.Label>Name</Form.Label>
+                      <Form.Control type="text" required onChange={(e)=>setName(e.target.value)}></Form.Control>
+                      <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                  </Form.Group>
+
+                
                   <Form.Group className='mb-3' controlId='email'>
                       <Form.Label>Email</Form.Label>
                       <Form.Control type="email" required onChange={(e)=>setEmail(e.target.value)}></Form.Control>
                       <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
                   </Form.Group>
+
                   <Form.Group className='mb-3' controlId='password'>
                       <Form.Label>Password</Form.Label>
                       <Form.Control type="password" required onChange={(e)=>setPassword(e.target.value)}></Form.Control>
                       <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
                   </Form.Group>
+
+
+
+                  <Form.Group className='mb-3' controlId='password'>
+                      <Form.Label>Confirm Password</Form.Label>
+                      <Form.Control type="password" required onChange={(e)=>setConfirmPassword(e.target.value)}></Form.Control>
+                      <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                  </Form.Group>    
+           
+                  
                  
                <div className='mb-3'>
-                   <Button type="submit">Sign in</Button>
+                   <Button type="submit">Sign Up</Button>
                </div>
+
                <div className="mb-3">
-          New customer?{' '}
-          <Link to={`/signup?redirect=${redirect}`}>Create your account</Link>
+          Already have an account?{' '}
+          <Link to={`/signin?redirect=${redirect}`}>Sign-In</Link>
         </div>
               </Form>
           </Container>
@@ -93,4 +123,4 @@ function SigninScreen() {
   )
 }
 
-export default SigninScreen
+export default SignupScreen

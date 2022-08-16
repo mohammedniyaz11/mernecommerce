@@ -28,7 +28,7 @@ productRouter.get('/:id',async(req,res)=>{
     if(product){
         res.send(product)
     }else{
-        res.json('hello')
+      
         res.status(404).send({message:'Product not found'})
     }
  
