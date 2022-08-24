@@ -79,9 +79,11 @@ function SigninScreen() {
                <div className='mb-3'>
                    <Button type="submit">Sign in</Button>
                </div>
-               <div className="mb-3">
+               <div className="ml-3">
           New customer?{' '}
           <Link to={`/signup?redirect=${redirect}`}>Create your account</Link>
+          forgot password ?{' '}
+          <Link to={`/forgot`} style={{MarginLeft:'2rem'}}> Forgot password</Link>
         </div>
               </Form>
           </Container>

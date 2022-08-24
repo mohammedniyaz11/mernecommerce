@@ -13,12 +13,16 @@ import CartScreen from './screens/CartScreen';
 import SigninScreen from './screens/SigninScreen';
 import SignupScreen from './screens/SignupScreen';
 import ShippingScreen from './screens/ShippingScreen';
+import Token from './screens/Token';
+import ForgotEmail from './screens/ForgotEmail'
+import ResetPassword from './screens/ResetPassword'
 
 function App() {
   // const{state}=useContext(Store);
   // const{cart,userInfo}=state;
   const { state, dispatch: ctxDispatch } = useContext(Store);
   const { cart, userInfo } = state;
+  console.log(userInfo,"userinfo============")
   const signoutHandler = () => {
     ctxDispatch({ type: 'USER_SIGNOUT' });
     localStorage.removeItem('userInfo');
@@ -51,7 +55,13 @@ function App() {
 
               </Link>
               {userInfo ? (
+                
+                
                   <NavDropdown title={userInfo.name} id="basic-nav-dropdown">
+                    
+                        <LinkContainer to="/profile">
+                      <NavDropdown.Item>User Profile</NavDropdown.Item>
+                    </LinkContainer>
                     <LinkContainer to="/profile">
                       <NavDropdown.Item>User Profile</NavDropdown.Item>
                     </LinkContainer>
@@ -88,6 +98,10 @@ function App() {
          <Route path='/cart' element={<CartScreen/>}/>
          <Route path='/signin' element={<SigninScreen/>}/>
          <Route path='/signup' element={<SignupScreen/>}/>
+         <Route path='/user/activate/:id' element={<Token></Token>}/>
+         <Route path='/forgot' element={<ForgotEmail></ForgotEmail>}></Route>
+         <Route path='/user/reset/:id' element={<ResetPassword/>}/>
+         
          
          <Route path='/shipping' element={<ShippingScreen/>}/>
         </Routes>
